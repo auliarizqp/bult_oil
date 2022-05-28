@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="station_tree_view" model="ir.ui.view">
+        <field name="name">station.station.tree</field>
+        <field name="model">station.station</field>
+        <field name="arch" type="xml">
+            <tree string="Pump Station">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="station_form_view" model="ir.ui.view">
+        <field name="name">station.station.form</field>
+        <field name="model">station.station</field>
+        <field name="arch" type="xml">
+            <form string="Pump Station">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" required="1"/></h1>
+                    </div>
+                    <notebook>               
+                        <page string="Pump Line">
+                            <field name="pump_line_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>    
+
+    <record id="station_action" model="ir.actions.act_window">
+        <field name="name">Pump Station</field>
+        <field name="res_model">station.station</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="station_tree_view"/>
+    </record>
+
+    <menuitem id="root_menu_station"
+              name="Pump Station"/>
+              
+    <menuitem id="sub_menu_station"
+              parent="root_menu_station"  
+              name="Pump Station"/>
+              
+    <menuitem id="menu_station"  
+              name="Station"
+              parent="sub_menu_station"
+              action="station_action"/> 
+</odoo>

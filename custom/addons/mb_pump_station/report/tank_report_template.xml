@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_tank_report_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <t t-set="tank_records" t-value="request.env['pump.tank'].browse(tank_records)"/>    
+                    <t t-set="tank_reading_records" t-value="request.env['tank.reading'].search([('tank_id','in',tank_records.ids)])"/>    
+                    <h1 style="text-align:center">Tank Reading Report
+                    <t t-set="from_date_plain_text" t-value="from_date.replace('-', '')"/>
+                    <t t-set="to_date_plain_text" t-value="to_date.replace('-', '')"/>
+                    <t t-set="from_date_obj" t-value="datetime.datetime.strptime(from_date_plain_text, '%Y%m%d').date()"/>
+                    <t t-set="to_date_obj" t-value="datetime.datetime.strptime(to_date_plain_text, '%Y%m%d').date()"/>
+                    
+                    <!-- VARIABLES FOR TOTAL  -->
+                    <t t-set="opening_dip_total" t-value="0"/>
+                    <t t-set="purchase_total" t-value="0"/>
+                    <t t-set="sales_total" t-value="0"/>
+                    <t t-set="book_stock_total" t-value="0"/>
+                    <t t-set="closing_total" t-value="0"/>
+                    <t t-set="normal_variance_total" t-value="0"/>
+                    <t t-set="normal_variance_precentage_total" t-value="0"/>
+                </h1>
+                    <br/>
+                        <t t-foreach="tank_reading_records" t-as="tank_reading_record">
+                            <!--  and -->
+                            <t t-if="tank_reading_record.date &lt;= to_date_obj and tank_reading_record.date >= from_date_obj and tank_reading_record.shift_id.id in shits">
+                                <table class="table">
+                                <thead>
+                                <tr>
+                                <h2><td colspan="8" style="text-align: center;font-size:25px"><t t-esc="tank_reading_record.tank_id.name"/></td></h2>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Opening dip(tank)</th>
+                                    <th>Purchase(tank)</th>
+                                    <th>Sales (pump)</th>
+                                    <th>Book stock</th>
+                                    <th>Closing dip</th>
+                                    <th>Variance</th>
+                                    <th>Variance(%)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <t t-set="get_pump_reading" t-value="request.env['pump.reading'].search([('tank_id','=',tank_reading_record.tank_id.id),('date','=',tank_reading_record.date)])"/>
+                                    <td><t t-esc="tank_reading_record.date"/></td>
+                                    <td><t t-esc="tank_reading_record.t_opening_reading"/>
+                                        <t t-set="opening_dip_total" t-value="opening_dip_total + tank_reading_record.t_opening_reading"/>
+                                    </td>
+                                    <td><t t-esc="tank_reading_record.purchase"/>
+                                        <t t-set="purchase_total" t-value="purchase_total + tank_reading_record.purchase"/>
+                                    </td>
+                                    <td>
+                                        <!-- <t t-set="get_pump_reading" t-value="request.env['pump.reading'].search([('tank_id','=',tank_reading_record.tank_id.id),('date','=',tank_reading_record.date)])"/> -->
+                                        <t t-if="get_pump_reading">
+                                            <!-- <t t-esc="abs(sum(get_pump_reading.mapped('p_expected_sales')))"/> -->
+                                            <t t-esc="'%.2f'%(abs(sum(get_pump_reading.mapped('p_expected_sales'))))"/>
+                                            <t t-set="sales_total" t-value="sales_total + abs(sum(get_pump_reading.mapped('p_expected_sales')))"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="sales_total" t-value="sales_total + 0.0"/>
+                                        </t>                                        
+                                    </td>
+                                    <td>
+                                        <t t-set="book_stock" t-value="tank_reading_record.t_opening_reading + (tank_reading_record.purchase - abs(sum(get_pump_reading.mapped('p_expected_sales'))))"/>
+                                        <t t-esc="'%.2f'%(book_stock)" /> 
+                                        <t t-set="book_stock_total" t-value="book_stock_total + book_stock"/>
+                                    </td>
+                                    <td><t t-esc="tank_reading_record.t_closing_reading"/>
+                                        <t t-set="closing_total" t-value="closing_total + tank_reading_record.t_closing_reading"/>
+                                    </td>
+                                    <td>
+                                        <t t-set="normal_variance" t-value="tank_reading_record.t_closing_reading - book_stock"/>
+                                        <t t-esc="'%.2f'%(normal_variance)" />   
+                                        <t t-set="normal_variance_total" t-value="normal_variance_total + normal_variance"/>
+                                    </td>
+                                    <td>
+                                        <t t-if="tank_reading_record.t_closing_reading != 0.0">
+                                            <t t-set="variance_percentage" t-value="(normal_variance/tank_reading_record.t_closing_reading)*100"/>
+                                            <t t-esc="'%.2f'%(variance_percentage)" />                                            
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="variance_percentage" t-value="0.0"/>
+                                            <t t-esc="'%.2f'%(variance_percentage)"/>
+                                        </t>
+                                        <t t-set="normal_variance_precentage_total" t-value="normal_variance_precentage_total + variance_percentage"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </table>
+                            </t>
+                        </t>
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="width:12.5%"><strong>Total</strong></td>
+                                <td style="width: 12.5%;padding-left: 0;"><strong>                                
+                                    <t t-esc="'%.2f'%(opening_dip_total)"/>
+                                </strong></td>
+                                <td style="padding-left: 40px;"><strong>
+                                    <t t-esc="'%.2f'%(purchase_total)"/>
+                                </strong></td>
+                                <td style="width: 12.5%;"><strong>
+                                    <t t-esc="'%.2f'%(sales_total)"/>
+                                </strong></td>
+                                <td style="width: 12.5%;"><strong>
+                                    <t t-esc="'%.2f'%(book_stock_total)"/>
+                                </strong></td>
+                                <td style="width: 10.5%;padding-left:0px"><strong>
+                                    <t t-esc="'%.2f'%(closing_total)"/>
+                                </strong></td>
+                                <td style="width: 9.5%;padding-left:0px"><strong>
+                                    <t t-esc="'%.2f'%(normal_variance_total)"/>
+                                </strong></td>
+                                <td style="width: 12%;padding-left:0px"><strong>
+                                    <t t-esc="'%.2f'%(normal_variance_precentage_total)"/>
+                                </strong></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+            </t>
+        </t>
+    </template>
+    
+<record id="action_report_tank_report" model="ir.actions.report">
+    <field name="name">Tank Reading Report Details</field>
+    <field name="model">tank.reading.wizard</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">mb_pump_station.report_tank_report_document</field>
+    <field name="report_file">mb_pump_station.report_tank_report_document</field>
+    <!-- <field name="print_report_name">(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field> -->
+    <field name="binding_model_id" ref="model_tank_reading_wizard"/>
+    <field name="binding_type">report</field>
+</record>
+</odoo>

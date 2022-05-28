@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tank_reading_wizard_view_form" model="ir.ui.view">
+        <field name="name">tank.reading.wizard.view.form</field>
+        <field name="model">tank.reading.wizard</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <group name="wizard_fields">
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="tank_ids" widget="many2many_tags"/>
+                            <field name="station_ids" widget="many2many_tags"/>
+                            <field name="shit_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button class="btn btn-primary" type="object" name="action_generate_tank_report" string="Print"/>
+                    
+                    <button string="Cancel" special="cancel" class="oe_link"/>
+                    
+                </footer>
+            </form>
+        </field>
+    </record>
+
+ <record id="tank_reading_wizard_view_action" model="ir.actions.act_window">
+        <field name="name">Tank Reading Reports</field>
+        <field name="res_model">tank.reading.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new incoterm
+          </p><p>
+            Incoterms are used to divide transaction costs and responsibilities between buyer and seller.
+          </p>
+        </field>
+    </record> 
+
+
+    <menuitem id="sub_menu_reports" parent="root_menu_station" name="Reports"/>
+    <menuitem id="sub_menu_tank_reports" action="tank_reading_wizard_view_action" parent="mb_pump_station.sub_menu_reports" name="Tank Reports"/>
+</odoo>

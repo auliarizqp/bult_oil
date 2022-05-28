@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pump_shift_tree_view" model="ir.ui.view">
+        <field name="name">pump.shift.tree</field>
+        <field name="model">pump.shift</field>
+        <field name="arch" type="xml">
+            <tree string="Pump Shift">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pump_shift_form_view" model="ir.ui.view">
+        <field name="name">pump.shift.form</field>
+        <field name="model">pump.shift</field>
+        <field name="arch" type="xml">
+            <form string="Pump Shift">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" required="1"/></h1>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>    
+
+    <record id="pump_shift_action" model="ir.actions.act_window">
+        <field name="name">Pump Shift</field>
+        <field name="res_model">pump.shift</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pump_shift_tree_view"/>
+    </record>
+
+    <menuitem id="sub_menu_pump_shift"
+              parent="root_menu_station"  
+              name="Shift"/>
+              
+    <menuitem id="menu_pump_shift"  
+              name="Shift"
+              parent="sub_menu_pump_shift"
+              action="pump_shift_action"/> 
+</odoo>

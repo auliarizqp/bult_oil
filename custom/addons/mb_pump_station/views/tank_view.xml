@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tank_tree_view" model="ir.ui.view">
+        <field name="name">pump.tank.tree</field>
+        <field name="model">pump.tank</field>
+        <field name="arch" type="xml">
+            <tree string="Tank">
+                <field name="name"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tank_form_view" model="ir.ui.view">
+        <field name="name">pump.tank.form</field>
+        <field name="model">pump.tank</field>
+        <field name="arch" type="xml">
+            <form string="Tank">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" required="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_id" domain="[('is_fule', '=', True)]"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>    
+
+    <record id="tank_action" model="ir.actions.act_window">
+        <field name="name">Tank</field>
+        <field name="res_model">pump.tank</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="tank_tree_view"/>
+    </record>
+              
+    <menuitem id="menu_tank"  
+              name="Tank"
+              parent="sub_menu_station"
+              action="tank_action"/> 
+</odoo>

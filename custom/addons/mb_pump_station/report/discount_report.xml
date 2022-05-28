@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_discount">
+	    <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <br/><br />
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                           <th class="text-center"><h3 scope="col" class="text-center">Customer Wise Discount Report</h3></th> 
+                        </tr>
+                        <tr>
+                            <th class="text-center">From
+                                <span t-esc="time.strftime('%d/%m/%Y ', time.strptime(from_date, '%Y-%m-%d'))"> </span>To
+                                <span t-esc="time.strftime('%d/%m/%Y ', time.strptime(to_date, '%Y-%m-%d'))"></span>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <t t-foreach="list_of_dict" t-as="dictt">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colsspan = "9" class = "text-center" t-esc = "dictt.get('partner_name')"></th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Vehicle</th>
+                                <th scope="col">Invoice No</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Total Discount</th>
+                                <th scope="col">Paid Discount</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        
+                        <t t-set="partner_wise_data" t-value="dictt.get('partner_wise_data_list')" />
+
+                        <t t-foreach="partner_wise_data" t-as="data_dictt">
+                            <tbody>
+                                <tr>
+                                    <td t-esc = "data_dictt.get('vehicle_no') or ' '"></td>
+                                    <td t-esc = "data_dictt.get('invoice_no') or  ' '"></td>
+                                    <td t-esc = "data_dictt.get('invoice_date') or ' '"></td>
+                                    <td t-esc = "data_dictt.get('item') or ' '"></td>
+                                    <td t-esc = "data_dictt.get('quantity') or ' '"></td>
+                                    <td t-esc = "'%.2f'% data_dictt.get('discount') or ' '"></td>
+                                    <td t-esc = "'%.2f'% data_dictt.get('total_discount') or ' '"></td>
+                                    <td t-esc = "'%.2f'% data_dictt.get('paid_discount') or ' '"></td>
+                                    <td t-esc = "'%.2f'% data_dictt.get('balance') or ' '"></td>                                
+                                </tr>
+                            </tbody>
+                        </t>
+    
+                        <tbody>
+                            <tr>
+                                <td scope="row" ></td>
+                                <td scope="row" ></td>
+                                <td scope="row" ></td>
+                                <td scope="row" ></td>
+                                <td scope="row" ></td>
+                                <td scope="row" class="font-weight-bold">Total Discount</td>
+                                <td scope="row" class="font-weight-bold"  t-esc = "dictt.get('total_discount')"></td>
+                                <td scope="row" class="font-weight-bold"  t-esc = "dictt.get('total_paid_discount')"></td>
+                                <td scope="row" class="font-weight-bold"  t-esc = "dictt.get('total_balance')"></td>
+                            </tr>
+                        </tbody>
+    
+    
+                    </table>
+
+                </t>
+                
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_discount" model="ir.actions.report">
+        <field name="name">Discount Report</field>
+        <field name="model">report.mb_pump_station.report_discount</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mb_pump_station.report_discount</field>
+        <field name="print_report_name">'Discount Report'</field>        
+    </record>  
+</odoo>

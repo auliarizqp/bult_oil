@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="account_journal.list">
+      <field name="name">account_journal list</field>
+      <field name="model">account_journal.account_journal</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="account_journal.action_window">
+      <field name="name">account_journal window</field>
+      <field name="res_model">account_journal.account_journal</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="account_journal.action_server">
+      <field name="name">account_journal server</field>
+      <field name="model_id" ref="model_account_journal_account_journal"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="account_journal" id="account_journal.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="account_journal.menu_1" parent="account_journal.menu_root"/>
+    <menuitem name="Menu 2" id="account_journal.menu_2" parent="account_journal.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="account_journal.menu_1_list" parent="account_journal.menu_1"
+              action="account_journal.action_window"/>
+    <menuitem name="Server to list" id="account_journal" parent="account_journal.menu_2"
+              action="account_journal.action_server"/>
+-->
+  </data>
+</odoo>

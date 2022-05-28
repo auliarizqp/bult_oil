@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+mb_pump_station.access_station_station,access_station_station,mb_pump_station.model_station_station,base.group_user,1,1,1,1
+mb_pump_station.access_station_pump,access_station_pump,mb_pump_station.model_station_pump,base.group_user,1,1,1,1
+mb_pump_station.access_pump_tank,access_pump_tank,mb_pump_station.model_pump_tank,base.group_user,1,1,1,1
+mb_pump_station.access_pump_reading,access_pump_reading,mb_pump_station.model_pump_reading,base.group_user,1,1,1,1
+mb_pump_station.access_tank_reading,access_tank_reading,mb_pump_station.model_tank_reading,base.group_user,1,1,1,1
+mb_pump_station.access_pump_shift,access_pump_shift,mb_pump_station.model_pump_shift,base.group_user,1,1,1,1
+mb_pump_station.discount_report_wizard,discount_report_wizard,mb_pump_station.model_te_discount_report_wizard,base.group_user,1,1,1,1
+mb_pump_station.access_tank_reading_wizard,access_tank_reading_wizard,mb_pump_station.model_tank_reading_wizard,base.group_user,1,1,1,1

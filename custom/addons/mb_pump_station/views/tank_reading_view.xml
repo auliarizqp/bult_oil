@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="seq_tank_reading_2" model="ir.sequence">
+        <field name="name">name</field>
+        <field name="code">tank.reading</field>
+        <field name="prefix">Tank/%(year)s/%(month)s/</field>
+        <field name="active">1</field>
+        <field name="padding">6</field>
+        <field name="number_increment">1</field>
+    </record>
+    </data>
+    <record id="tank_reading_tree_view" model="ir.ui.view">
+        <field name="name">tank.reading.tree</field>
+        <field name="model">tank.reading</field>
+        <field name="arch" type="xml">
+            <tree editable="top" create="1" delete="1" multi_edit="1" string="tank Reading">
+                <field name="name"/>
+                <field name="tank_id" required="1" attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="date" attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="user_id" attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="shift_id" attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="purchase" sum="Total Purchases" attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="t_opening_reading"  attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="t_closing_reading"  attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="t_expected_sales" sum="Total Sales" attrs="{'readonly': [('t_is_readonly', '=', True)]}"/>
+                <field name="t_is_readonly" invisible='1'/>
+                <field name="t_is_compute" invisible='1'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tank_reading_action" model="ir.actions.act_window">
+        <field name="name">Tank Reading</field>
+        <field name="res_model">tank.reading</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="tank_reading_tree_view"/>
+    </record>
+                   
+    <menuitem id="menu_tank_reading"  
+              name="Tank Reading"
+              parent="sub_menu_reading"
+              action="tank_reading_action"/> 
+</odoo>

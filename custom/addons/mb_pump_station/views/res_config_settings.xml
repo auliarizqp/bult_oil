@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- <record id="sh_account_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.account</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='analytic']" position="after">
+                <h2>Default Discount Accounts</h2>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <div class="content-group" >
+                            <div class="mt16">
+                                <label for="disc_debit_account_id" class="o_light_label"/>
+                                <field name="disc_debit_account_id" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <div class="content-group" >
+                            <div class="mt16">
+                                <label for="disc_credit_account_id" class="o_light_label"/>
+                                <field name="disc_credit_account_id" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="res_company_inherit_view_form" model="ir.ui.view">
+        <field name="name">res.company.inherit.view.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <field name = "currency_id" position = "after">
+                <field name="disc_credit_account_id" />
+                <field name="disc_debit_account_id" />
+            </field>
+            
+        </field>
+    </record>
+</odoo>

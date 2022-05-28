@@ -1,0 +1,121 @@
+
+<odoo>
+    <template id="journal_report">
+       <t t-call="web.basic_layout">
+         <div class="header">
+
+                 <h2 align="center">ELECT-EASTERN AND COASTAL DIOCESE PAYMENT VOUCHER</h2>
+                 <p align="center">P.O Box 837, Dare es Salaam, Tel: 255(22)2113246, 2134377<br>
+                     FAX: +255(22)2125505: DAR ES SALAAM
+                 </br></p>
+         </div>
+           <div class="page">
+               <p align="right">Date:_________________________</p>
+
+               <table class="table table-bordered"   style="border: 1px solid black; width: 700px;" >
+                   <tr style="height:35pt; border: 2px light black;">
+                       <th width="120pt" style="border: 1px solid black;">PAYEE</th>
+                       <th style="border: 1px solid black;"></th>
+                   </tr>
+                   <tr style="height:35pt; border: 1px solid black;">
+                       <th width="120pt" style="border: 1px solid black;">ADDRESS</th>
+                       <th style="border: 1px solid black;"></th>
+                   </tr>
+               </table><br/>
+               <p align="center">Cheque No__________________________________     Shs._____________________________</p>
+               <table class="table table-bordered"  style="border: 1px solid black;">
+                   <tr align="center" style="border: 1px solid black;">
+
+                       <th style="border: 1px solid black;">Description of service</th>
+                       <th width="120pt" style="border: 1px solid black;">Code No</th>
+                       <th width="120pt" style="border: 1px solid black;">Shs</th>
+                       <th width="120pt" style="border: 1px solid black;">Cts</th>
+                   </tr>
+                   <tr style="height:28pt; border: 1px solid black;" >
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                    <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                    <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                    <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                    <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                    <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                     <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                      <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+                     <tr style="height:28pt; border: 1px solid black;">
+
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+                       <td style="border: 1px solid black;"></td>
+
+                   </tr>
+
+               </table>
+
+               <br/>
+               <p>Shillings____________________________________________</p>
+               <br/>
+               <p>Authorized by___________________________<span>Title_________________________</span></p><br/>
+               <p>Approved by_____________________________<span>Title_________________________</span></p><br/>
+               <p>Paid by_________________________________<span>Date__________________________</span></p><br/>
+               <p>Received by_____________________________<span>Date__________________________</span></p><br/>
+
+
+           </div>
+       </t>
+    </template>
+</odoo>

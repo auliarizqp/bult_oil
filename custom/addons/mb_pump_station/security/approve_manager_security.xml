@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="group_edit_reading_manager" model="res.groups">
+            <field name="name">Can Edit Reading Manager?</field>
+        </record>
+    </data>
+</odoo>

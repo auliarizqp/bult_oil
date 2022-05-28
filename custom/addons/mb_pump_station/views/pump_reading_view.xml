@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="seq_pump_reading_2" model="ir.sequence">
+        <field name="name">name</field>
+        <field name="code">pump.reading</field>
+        <field name="prefix">Pump/%(year)s/%(month)s/</field>
+        <field name="active">1</field>
+        <field name="padding">6</field>
+        <field name="number_increment">1</field>
+    </record>
+    </data>
+    <record id="pump_reading_tree_view" model="ir.ui.view">
+        <field name="name">pump.reading.tree</field>
+        <field name="model">pump.reading</field>
+        <field name="arch" type="xml">
+            <tree editable="top" create="1" delete="1" multi_edit="1" string="Pump Reading">
+                <field name="name"/>
+                <field name="pump_id" required="1" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name = "tank_id" invisible = "1"/>
+                <field name="date" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="user_id" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="shift_id" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="p_opening_reading"  attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="p_closing_reading"  attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="p_expected_sales" sum="Total Lts" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="sale_price"  attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="total_sales" sum="Total Sales" attrs="{'readonly': [('is_readonly', '=', True)]}"/>
+                <field name="is_readonly" invisible='1'/>
+                <field name="is_compute" invisible='1'/>
+            </tree>
+        </field>
+    </record>
+    
+    
+
+    <record id="pump_reading_action" model="ir.actions.act_window">
+        <field name="name">Pump Reading</field>
+        <field name="res_model">pump.reading</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="pump_reading_tree_view"/>
+    </record>
+          
+    <menuitem id="sub_menu_reading"
+              parent="root_menu_station"  
+              name="Reading"/>           
+    <menuitem id="menu_pump_reading"  
+              name="Pump Reading"
+              parent="sub_menu_reading"
+              action="pump_reading_action"/> 
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.discount</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[1]//field[@name='invoice_line_ids']/tree/field[@name='price_unit']" position="after">
+                <field name="discount_per_liter"  optional="show"/>
+                <field name="total_discount"  optional="show"/>
+                <field name="price_after_discount"  optional="show"/>
+            </xpath>
+            <xpath expr="//notebook//page[1]//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="after">
+                <field name="pump_id"  optional="show"/>
+            </xpath>
+            <xpath expr="//notebook//page[2]//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
+                <field name="is_discount_line"  invisible = "1"/>
+                <field name="discount_per_liter"  invisible = "1"/>
+                <field name="total_discount"  invisible = "1"/>
+                <field name="price_after_discount"  invisible = "1"/>
+                <field name="pump_id"  invisible = "1"/>
+            </xpath>
+            <field name = "payment_reference" position = "after">
+                <field name="vehicle_no" attrs = "{'invisible' : [('move_type','=','entry')]}" />
+                <field name="is_discount_entry" attrs = "{'invisible' : [('move_type','!=','entry')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
